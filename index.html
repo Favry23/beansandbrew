@@ -18,6 +18,7 @@
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#cart" class="cart-icon">🛒 <span id="cart-count">0</span></a></li>
             </ul>
         </div>
     </nav>
@@ -56,6 +57,7 @@
                             <span class="option-price">2.00 BHD</span>
                         </div>
                     </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('V60 Iced - Colombian', 2.00)">Add to Cart</button>
                 </div>
                 
                 <!-- V60 Hot -->
@@ -77,6 +79,7 @@
                             <span class="option-price">2.00 BHD</span>
                         </div>
                     </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('V60 Hot - Colombian', 2.00)">Add to Cart</button>
                 </div>
                 
                 <!-- Espresso Shots -->
@@ -85,6 +88,7 @@
                     <h3>Espresso Shots</h3>
                     <p>Rich, bold, and perfectly crafted. Our signature espresso blend.</p>
                     <span class="price">1.00 BHD</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Espresso Shots', 1.00)">Add to Cart</button>
                 </div>
                 
                 <!-- Americano -->
@@ -93,10 +97,73 @@
                     <h3>Americano</h3>
                     <p>Classic espresso shots topped with hot water.</p>
                     <span class="price">2.20 BHD</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Americano', 2.20)">Add to Cart</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Shopping Cart</h2>
+                <span class="close" onclick="closeCart()">&times;</span>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <p>Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: <span id="total-price">0.00</span> BHD</h3>
+            </div>
+            <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-form-container">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <span class="close" onclick="closeCheckout()">&times;</span>
+            </div>
+            
+            <div class="checkout-content">
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="summary-items"></div>
+                    <div class="summary-total">
+                        <strong>Total: <span id="summary-total">0.00</span> BHD</strong>
+                    </div>
+                </div>
+
+                <form class="checkout-form" id="checkout-form">
+                    <h3>Your Details</h3>
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <textarea placeholder="Delivery Address" rows="3" required></textarea>
+                    
+                    <h3>Payment Method</h3>
+                    <div class="payment-method">
+                        <div class="payment-option">
+                            <input type="radio" id="benefit-pay" name="payment" value="benefit-pay" checked>
+                            <label for="benefit-pay">💳 Benefit Pay</label>
+                        </div>
+                    </div>
+
+                    <div class="benefit-pay-info">
+                        <h4>💳 Pay via Benefit Pay</h4>
+                        <p class="payment-number"><strong>Transfer to: 38856039</strong></p>
+                        <p class="payment-note">Please transfer the total amount to the number above and provide the transaction reference in your order.</p>
+                        <input type="text" placeholder="Transaction Reference (optional)" id="transaction-ref">
+                    </div>
+
+                    <button type="submit" class="cta-button">Complete Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about">
