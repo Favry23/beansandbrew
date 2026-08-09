@@ -516,15 +516,16 @@ body {
     color: #555;
 }
 
-.benefit-pay-info {
+.payment-info {
     background: #f0e6d8;
     padding: 1.2rem;
     border-radius: 5px;
     border-left: 4px solid #d4a574;
     margin: 1rem 0;
+    transition: all 0.3s ease;
 }
 
-.benefit-pay-info h4 {
+.payment-info h4 {
     color: #6f4e37;
     margin-bottom: 0.8rem;
 }
