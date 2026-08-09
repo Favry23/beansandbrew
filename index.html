@@ -142,20 +142,29 @@
                     <input type="text" placeholder="Full Name" required>
                     <input type="email" placeholder="Email Address" required>
                     <input type="tel" placeholder="Phone Number" required>
-                    <textarea placeholder="Delivery Address" rows="3" required></textarea>
+                    <textarea placeholder="Your Home Address" rows="3" required></textarea>
                     
                     <h3>Payment Method</h3>
                     <div class="payment-method">
                         <div class="payment-option">
-                            <input type="radio" id="benefit-pay" name="payment" value="benefit-pay" checked>
-                            <label for="benefit-pay">💳 Benefit Pay</label>
+                            <input type="radio" id="cod" name="payment" value="cod" checked>
+                            <label for="cod">💵 Cash on Delivery (COD)</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="benefit" name="payment" value="benefit">
+                            <label for="benefit">💳 Benefit Pay</label>
                         </div>
                     </div>
 
-                    <div class="benefit-pay-info">
+                    <div id="cod-info" class="payment-info">
+                        <h4>💵 Cash on Delivery</h4>
+                        <p class="payment-note">Pay directly to our driver when your order arrives at home.</p>
+                    </div>
+
+                    <div id="benefit-info" class="payment-info" style="display: none;">
                         <h4>💳 Pay via Benefit Pay</h4>
                         <p class="payment-number"><strong>Transfer to: 38856039</strong></p>
-                        <p class="payment-note">Please transfer the total amount to the number above and provide the transaction reference in your order.</p>
+                        <p class="payment-note">Please transfer the total amount to the number above. Once transferred, provide the transaction reference below.</p>
                         <input type="text" placeholder="Transaction Reference (optional)" id="transaction-ref">
                     </div>
 
