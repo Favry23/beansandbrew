@@ -87,6 +87,26 @@ function closeCheckout() {
     document.getElementById('checkout-modal').style.display = 'none';
 }
 
+// Handle payment method toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const codInfo = document.getElementById('cod-info');
+            const benefitInfo = document.getElementById('benefit-info');
+            
+            if (this.value === 'cod') {
+                codInfo.style.display = 'block';
+                benefitInfo.style.display = 'none';
+            } else if (this.value === 'benefit') {
+                codInfo.style.display = 'none';
+                benefitInfo.style.display = 'block';
+            }
+        });
+    });
+});
+
 // Handle checkout form submission
 document.addEventListener('DOMContentLoaded', function() {
     const checkoutForm = document.getElementById('checkout-form');
@@ -99,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = checkoutForm.querySelector('input[type="email"]').value;
             const phone = checkoutForm.querySelector('input[type="tel"]').value;
             const address = checkoutForm.querySelector('textarea').value;
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
             
             // Calculate total
             let total = 0;
@@ -109,6 +130,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create order summary
             let orderItems = cart.map(item => `- ${item.name}: ${item.price.toFixed(2)} BHD`).join('\n');
             
+            // Prepare email content
+            let emailContent = `
+New Order Received!
+
+Customer Details:
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Home Address: ${address}
+
+Order Items:
+${orderItems}
+
+Total: ${total.toFixed(2)} BHD
+
+Payment Method: ${paymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 'Benefit Pay'}
+`;
+            
+            if (paymentMethod === 'benefit') {
+                const transactionRef = document.getElementById('transaction-ref').value;
+                emailContent += `Transaction Reference: ${transactionRef || 'Not provided'}`;
+            }
+            
             // Send email via Formspree
             const formData = new FormData();
             formData.append('name', name);
@@ -117,6 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('address', address);
             formData.append('items', orderItems);
             formData.append('total', total.toFixed(2) + ' BHD');
+            formData.append('payment_method', paymentMethod);
+            
+            if (paymentMethod === 'benefit') {
+                formData.append('transaction_ref', document.getElementById('transaction-ref').value);
+            }
             
             // Using Formspree service
             fetch('https://formspree.io/f/myzywglw', {
@@ -128,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Order submitted successfully! We will contact you soon.');
+                    alert('Order submitted successfully! We will contact you soon to confirm your order.');
                     cart = [];
                     updateCartCount();
                     closeCheckout();
