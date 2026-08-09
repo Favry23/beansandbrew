@@ -168,6 +168,50 @@ body {
     font-size: 0.95rem;
 }
 
+.menu-options {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #8b6f47;
+    margin-bottom: 1rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #e0d5c7;
+    transition: all 0.3s ease;
+}
+
+.option:hover {
+    border-color: #d4a574;
+    background: #fefcf9;
+}
+
+.option span {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.option-price {
+    background: #d4a574;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
 .price {
     display: inline-block;
     background: #d4a574;
